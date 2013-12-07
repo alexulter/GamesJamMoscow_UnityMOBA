@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using AssemblyCSharp;
 
 public class AbilityBase : MonoBehaviour {
 
@@ -12,19 +13,9 @@ public class AbilityBase : MonoBehaviour {
 	void Update () {
 	
 	}
-
-	public enum CastType
-	{
-		Chanelling,
-		Instant
-	}
-
-	public enum AimType
-	{
-
-
-	}
-
-
+	AimType AimType;
+	CastType CastType;
+	private double Manacost;
+	private double Cooldown;
 
 }

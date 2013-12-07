@@ -12,6 +12,9 @@ namespace AssemblyCSharp
 {
 		public enum CastType
 		{
+		Unknown, //заглушка
+		Chanelling, //нужно стоять и кастовать какое-то время
+		InstantCast //мгновенно применяется
 		}
 }
 

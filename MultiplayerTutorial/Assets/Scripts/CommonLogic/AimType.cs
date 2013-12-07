@@ -12,6 +12,12 @@ namespace AssemblyCSharp
 {
 		public enum AimType
 		{
+		Unknown, //заглушка
+		Self, //на себя
+		EnemyHero, //вражеский герой
+		AllyHero, //дружественный герой
+		Skillshot, //скилшот - "выстрел"в направлении
+		OnTerrain //по террейну
 		}
 
 }
