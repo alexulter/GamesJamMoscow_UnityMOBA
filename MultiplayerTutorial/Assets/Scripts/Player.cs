@@ -58,6 +58,23 @@ public class Player : MonoBehaviour
 
     private void InputMovement()
     {
+//		/// Тут мы можем поворачивать плеера по движению стрелочакам
+//		{
+//		float speed = 10.0F;
+//		float rotationSpeed = 100.0F;
+//		float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+//		rotation *= Time.deltaTime;
+//		transform.Rotate(0, rotation, 0);
+//		}
+//		/// Тут мы можем поворачивать плеера по движению мыши
+//		{
+//			float horizontalSpeed = 2.0F;
+//			float verticalSpeed = 2.0F;
+//			float h = horizontalSpeed * Input.GetAxis("Mouse X");
+//			float v = verticalSpeed * Input.GetAxis("Mouse Y");
+//			transform.Rotate(v, h, 0);
+//		}
+			
         if (Input.GetKey(KeyCode.W))
             rigidbody.MovePosition(rigidbody.position + Vector3.forward * speed * Time.deltaTime);
 
@@ -69,7 +86,6 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
             rigidbody.MovePosition(rigidbody.position - Vector3.right * speed * Time.deltaTime);
-		
     }
 
     private void SyncedMovement()
