@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class AbilityBase : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -12,4 +12,15 @@ public class NewBehaviourScript : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public enum CastType
+	{
+		Chanelling,
+		Instant
+	}
+
+	public 
+
+
+
 }
