@@ -10,11 +10,15 @@
 using System;
 namespace AssemblyCSharp
 {
-		public class ExampleClass
+		public enum AimType //типа абилки по способу указания цели
 		{
-				public ExampleClass ()
-				{
-				}
+		Unknown, //заглушка
+		Self, //на себя
+		EnemyHero, //вражеский герой
+		AllyHero, //дружественный герой
+		Skillshot, //скилшот - "выстрел"в направлении
+		OnTerrain //по террейну
 		}
+
 }
 

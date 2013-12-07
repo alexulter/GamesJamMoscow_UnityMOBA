@@ -10,15 +10,11 @@
 using System;
 namespace AssemblyCSharp
 {
-		public enum AimType
+		public enum CastType //типы абилок по способам применения
 		{
 		Unknown, //заглушка
-		Self, //на себя
-		EnemyHero, //вражеский герой
-		AllyHero, //дружественный герой
-		Skillshot, //скилшот - "выстрел"в направлении
-		OnTerrain //по террейну
+		Chanelling, //нужно стоять и кастовать какое-то время
+		InstantCast //мгновенно применяется
 		}
-
 }
 
