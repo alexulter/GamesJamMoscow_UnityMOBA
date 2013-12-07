@@ -19,7 +19,11 @@ public class AbilityBase : MonoBehaviour {
 		Instant
 	}
 
-	public 
+	public enum AimType
+	{
+
+
+	}
 
 
 
