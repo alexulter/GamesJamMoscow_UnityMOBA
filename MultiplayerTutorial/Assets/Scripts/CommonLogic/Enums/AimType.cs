@@ -10,7 +10,7 @@
 using System;
 namespace AssemblyCSharp
 {
-		public enum AimType
+		public enum AimType //типа абилки по способу указания цели
 		{
 		Unknown, //заглушка
 		Self, //на себя

@@ -49,7 +49,7 @@ public class CameraMoveRTS : MonoBehaviour {
 		prevY=Input.mousePosition.y;
 		prevX=Input.mousePosition.x;
 
-		//Устанавливается новое положение камеры, с условием, что ось Х камеры парралельна оси Х области
+		//Устанавливается новое положение камеры, с условием, что ось Х камеры парралельна оси Х области, и наклон сделан по оси Х
 		transform.Translate(x,y,y);
 	}
 	

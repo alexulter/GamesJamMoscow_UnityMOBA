@@ -10,7 +10,7 @@
 using System;
 namespace AssemblyCSharp
 {
-		public enum CastType
+		public enum CastType //типы абилок по способам применения
 		{
 		Unknown, //заглушка
 		Chanelling, //нужно стоять и кастовать какое-то время

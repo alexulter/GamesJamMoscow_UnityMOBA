@@ -15,7 +15,7 @@ public class AbilityBase : MonoBehaviour {
 	}
 	AimType AimType;
 	CastType CastType;
-	private double Manacost;
-	private double Cooldown;
+	private double Manacost; //сколько маны нужно потратить на применение
+	private double Cooldown; //время отката абилки, в секундах
 
 }
