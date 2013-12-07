@@ -4,7 +4,7 @@ using System.Collections;
 public class CameraMoveRTS : MonoBehaviour {
 
 	//Скорость движения камеры
-	public float moveSpeed = 40f;
+	public float moveSpeed = 10f;
 
 	//Коордиаты для нового положения камеры
 	float x=0;
