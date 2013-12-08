@@ -21,7 +21,11 @@ public class CameraMoveRTS : MonoBehaviour {
 	void Start () {
 		
 	}
-	
+	void OnGUI ()
+	{
+		GUI.Label (new Rect (0,0,300,100), "Пробел - центрировать камеру на герое. Мышка у края экрана - подвинуть камеру");
+	}
+
 	// Update is called once per frame
 	void Update () {
 	
