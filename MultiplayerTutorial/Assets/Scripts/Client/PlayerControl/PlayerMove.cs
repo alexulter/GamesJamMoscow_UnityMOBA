@@ -21,9 +21,16 @@ public class PlayerMove : MonoBehaviour {
 	float dx;
 	float dz;
 
+	float dx_backup;
+	float dz_backup;
+
 	//Переменные для создания луча, определяющего координаты клика по карте
 	Ray ray;
 	RaycastHit hit;
+
+	//Данные для поиска столкновений
+	Ray rayCollsion;
+	RaycastHit hitCollision;
 
 	//Хранилища для текущей позиции объекта(в момент клика) и для конечной точки(место клика)
 	Vector3 curPos;
@@ -49,19 +56,25 @@ public class PlayerMove : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+	
+
 
 
 		//Получаем луч для той точки, в которую направлен наш курсор
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		rayCollsion =  Camera.main.ScreenPointToRay(Input.mousePosition);
 		Physics.Raycast (ray,out hit, 100);
 		Debug.DrawLine(ray.origin, hit.point);
 
 
+
 		//Проверка на нажатие правой кнопки мыши
 		if(Input.GetMouseButtonDown(1)){
+			GameObject.Find("GuiText1").guiText.text = "";
 
 			//Получаем текущую позицию игрока
 			curPos = transform.position;
+			curPos.y=0f;
 			//Сохраняем конечную позицию
 			targetPos = new Vector3(hit.point.x,0.5f,hit.point.z);
 			//Переключаем флаг для обработки движения игрока
@@ -84,18 +97,32 @@ public class PlayerMove : MonoBehaviour {
 		if(move)moveToTarget ();
 	}
 
+
+
 	//Метод, который двигает объект
 	void moveToTarget(){
+	
+		//Проверка на столкновения
+		Debug.DrawRay(transform.position, new Vector3(dx*x_direction,0,dz*z_direction),Color.red);
+		Debug.DrawRay(transform.position, new Vector3(dx*x_direction,0,0),Color.blue);
+		Debug.DrawRay(transform.position, new Vector3(0,0,dz*z_direction),Color.green);
+		Debug.DrawRay(curPos, targetPos-curPos,Color.black);
+		if (Physics.Raycast (transform.position, new Vector3 (dx * x_direction, 0, dz * z_direction), 1f)) {
+						dx = 0;
+						dz = 0;
+			GameObject.Find("GuiText1").guiText.text = "Player cannot move to target";
 
-		//Устанавливаем приращение движения в ноль
-	//	x_dist=0;
-	//	z_dist=0;
+				} 
 
+		 
+
+
+		//Устанавливаем приращение движения
 		z_dist=speed*z_direction;
 		x_dist=speed*x_direction;
 		//Проверка, нужно ли приращение по той или иной оси
 
-		if(dz>=0){
+		if(dz>0){
 			//z_dist=speed*z_direction;
 			//dz=dz*z_direction;
 			dz=dz-speed;
@@ -105,7 +132,7 @@ public class PlayerMove : MonoBehaviour {
 		//	transform.position  = new Vector3(transform.position.x,0.5f,targetPos.z);
 		};
 
-		if(dx>=0){
+		if(dx>0){
 			//x_dist=speed*x_direction;
 			//dx=dx*x_direction;
 			dx=dx-speed;
