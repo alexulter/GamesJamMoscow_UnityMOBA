@@ -5,6 +5,8 @@ using System.Collections;
 
 public class PlayerMove : MonoBehaviour {
 
+
+
 	//Переменные для работы с расстноянием
 
 	//Переменные для вычисления дистанции
@@ -12,8 +14,8 @@ public class PlayerMove : MonoBehaviour {
 	float z_dist=0;
 
 	//Переменные для получения направления
-	int x_direction=1;
-	int z_direction=1;
+	float x_direction=0;
+	float z_direction=0;
 
 	//Переменные для получения абсолютной дистации по модулю
 	float dx;
@@ -29,9 +31,11 @@ public class PlayerMove : MonoBehaviour {
 
 	//Переменная , по которой идет проверка, будет ли двигаться объект
 	bool move=false;
+	bool flagx=false;
+	bool flagz=false;
 
 	//Скорость объекта
-	public float speed=0.01f;
+	public float speed=0.15f;
 
 	//Переменные, для получения mesh из текущего объекта, чтобы можно было вычислить реальный размер
 	MeshFilter[] mfs;
@@ -45,7 +49,8 @@ public class PlayerMove : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-	   
+
+
 		//Получаем луч для той точки, в которую направлен наш курсор
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		Physics.Raycast (ray,out hit, 100);
@@ -71,6 +76,9 @@ public class PlayerMove : MonoBehaviour {
 			dx=Mathf.Abs(x_dist);
 		    dz=Mathf.Abs(z_dist);
 
+			flagx=true;
+			flagz=true;
+
 		}
 		//Вызов метода движения, если флаг движения равен true
 		if(move)moveToTarget ();
@@ -80,25 +88,58 @@ public class PlayerMove : MonoBehaviour {
 	void moveToTarget(){
 
 		//Устанавливаем приращение движения в ноль
-		x_dist=0;
-		z_dist=0;
-		//Проверка, нужно ли приращение по той или иной оси
-		if(dx>=0){
-			x_dist=speed*x_direction;
-			dx=dx-speed;
-		}else{}
-		if(dz>=0){
-			z_dist=speed*z_direction;
-			dz=dz-speed;
-		}else{}
+	//	x_dist=0;
+	//	z_dist=0;
 
+		z_dist=speed*z_direction;
+		x_dist=speed*x_direction;
+		//Проверка, нужно ли приращение по той или иной оси
+
+		if(dz>=0){
+			//z_dist=speed*z_direction;
+			//dz=dz*z_direction;
+			dz=dz-speed;
+		}else{
+			flagz=false;
+			z_dist=0;
+		//	transform.position  = new Vector3(transform.position.x,0.5f,targetPos.z);
+		};
+
+		if(dx>=0){
+			//x_dist=speed*x_direction;
+			//dx=dx*x_direction;
+			dx=dx-speed;
+		}else{
+			x_dist=0;
+			//transform.position  = new Vector3(targetPos.x,0.5f,transform.position.z);
+			flagx=false;
+		};
+
+	
+		Debug.Log("player x: " + transform.position.x + "  player z: " +transform.position.z + 
+		          " x direction: " + x_direction + " z direction: " + z_direction +
+		          " x-sterp: " + x_dist + " z-step: " + z_dist + 
+		          " dx: " + dx + " dz: " +dz +
+
+		          " move status: " + move 
+		          );
 		//Двигаем игрока на нужное расстояние
-			transform.position  = new Vector3(transform.position.x+x_dist,0.5f,transform.position.z+z_dist);
+		transform.Translate (x_dist, 0, z_dist);
+		//transform.position  = new Vector3(transform.position.x+x_dist,0.5f,transform.position.z+z_dist);
 	
 		//Проверка условий, если модель игрока примерно попала в область куда было указано идти, то флаг движения переходит в false
-		if (transform.position.x + b.size.x / 2 >= targetPos.x && transform.position.x - b.size.x / 2 <= targetPos.x) {
+	if (transform.position.x + b.size.x / 2 >= targetPos.x && transform.position.x - b.size.x / 2 <= targetPos.x) {
 			if(transform.position.z+b.size.z/2>=targetPos.z && transform.position.z-b.size.z/2<=targetPos.z)
-				move = false;
+
+		//if(!(flagx&&flagz))
+		//{
+			move = false;
+			//x_direction=0;
+			//z_direction=0;
+			//x_dist=0;
+			//z_dist=0;
+	//		dx=0;
+	//		dz=0;
 				}
 
 
