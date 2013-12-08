@@ -16,6 +16,8 @@ public class CameraMoveRTS : MonoBehaviour {
 	float prevX=0;
 	float prevY=0;
 
+	private bool LockCamera = false; //центрировать ли камеру на персонаже
+
 	void Start () {
 		
 	}
@@ -71,19 +73,27 @@ public class CameraMoveRTS : MonoBehaviour {
 
 
 		//Следим за героем
-			int DistanceAwayZ = 10;
-			int DistanceAwayY = -4; // Это расстояние по высоте. Отрицательное, потому что потом я вычитаю
+			int DistanceAwayZ = 3;
+			int DistanceAwayX = 3; // Это расстояние по высоте. Отрицательное, потому что потом я вычитаю
 			
-//			/// Ищем клон префаба
-//			GameObject player = GameObject.Find ("Player(Clone)");
-//			if (player) 
-//			{
-//				/// Берем координаты из префаба игрока
-//				Vector3 PlayerPOS = player.transform.transform.position;
-//				
-//				/// Обновляем положение камеры
-//				GameObject.Find ("Main Camera").transform.position = new Vector3 (PlayerPOS.x, PlayerPOS.y - DistanceAwayY, PlayerPOS.z - DistanceAwayZ);	
-//			}
+
+
+		if (Input.GetKeyDown (KeyCode.Space)) LockCamera = true;
+		if (Input.GetKeyUp (KeyCode.Space)) LockCamera = false;
+		if (LockCamera)
+		{
+			/// Ищем клон префаба
+			GameObject player = GameObject.Find ("Player(Clone)");
+			if (player) 
+			{
+				/// Берем координаты из префаба игрока
+				Vector3 PlayerPOS = player.transform.position;
+
+								
+				/// Обновляем положение камеры
+				transform.position = new Vector3 (PlayerPOS.x - DistanceAwayX, transform.position.y, PlayerPOS.z - DistanceAwayZ);	
+			}
+		}
 
 	}
 	
