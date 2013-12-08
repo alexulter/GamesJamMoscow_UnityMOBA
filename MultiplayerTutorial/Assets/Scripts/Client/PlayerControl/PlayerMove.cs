@@ -3,7 +3,7 @@ using System.Collections;
 
 
 
-public class P_MoveToTarget : MonoBehaviour {
+public class PlayerMove : MonoBehaviour {
 
 	//Переменные для работы с расстноянием
 

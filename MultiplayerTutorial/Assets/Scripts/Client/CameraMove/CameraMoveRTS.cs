@@ -4,7 +4,11 @@ using System.Collections;
 public class CameraMoveRTS : MonoBehaviour {
 
 	//Скорость движения камеры
+<<<<<<< HEAD
 	public float moveSpeed = 0.7f;
+=======
+	public float moveSpeed = 10f;
+>>>>>>> fdfecbb1ef3a9323c9d4ab02a4eab1ae510f9302
 
 	//Коордиаты для нового положения камеры
 	float x=0;

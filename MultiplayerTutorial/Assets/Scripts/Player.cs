@@ -86,6 +86,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
             rigidbody.MovePosition(rigidbody.position - Vector3.right * speed * Time.deltaTime);
+
+
     }
 
     private void SyncedMovement()
