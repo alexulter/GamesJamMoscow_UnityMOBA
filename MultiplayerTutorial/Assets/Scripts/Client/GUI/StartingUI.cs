@@ -21,11 +21,18 @@ public class StartingUI : MonoBehaviour
 	private float ButtonHeight = 100;
 	private float ButtonWidth = 250;
 	private float ButtonSpace = 50;
+	public bool QuickStart = false;
 
+	void Start()
+	{
+		if (QuickStart) StartServer ();
+	}
 	void OnGUI ()
 	{
-		if (!Network.isClient && !Network.isServer) 
+
+		if (!Network.isClient && !Network.isServer && !QuickStart) 
 		{
+
 			if (GUI.Button (new Rect (Screen.width / 2 - ButtonWidth / 2, Screen.height / 2 - 
 			                          ButtonHeight - ButtonSpace / 2, 250, 100), "Start Server"))
 				StartServer ();

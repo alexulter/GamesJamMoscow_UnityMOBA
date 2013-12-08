@@ -16,10 +16,16 @@ public class CameraMoveRTS : MonoBehaviour {
 	float prevX=0;
 	float prevY=0;
 
+	private bool LockCamera = false; //центрировать ли камеру на персонаже
+
 	void Start () {
 		
 	}
-	
+	void OnGUI ()
+	{
+		GUI.Label (new Rect (0,0,300,100), "Пробел - центрировать камеру на герое. Мышка у края экрана - подвинуть камеру");
+	}
+
 	// Update is called once per frame
 	void Update () {
 	
@@ -37,26 +43,26 @@ public class CameraMoveRTS : MonoBehaviour {
 
 
 		//Идет проверка для нижнего края экрана	
-		if (Input.mousePosition.y < 20 && Input.mousePosition.y<=prevY){
-			y = moveSpeed * Input.GetAxis ("Mouse Y");
+		if (Input.mousePosition.y < 20){
+			y = -moveSpeed;
 
 		} 
 		//Идет проверка для верхнего края экрана	
-		else if(Input.mousePosition.y > Screen.height-20&&Input.mousePosition.y >= prevY){
-			y = moveSpeed * Input.GetAxis ("Mouse Y");
+		else if(Input.mousePosition.y > Screen.height-20){
+			y = moveSpeed;
 
 		}
 		else {y=0;} ;
 
 		//Идет проверка для левого края экрана	
-		if (Input.mousePosition.x < 20 && Input.mousePosition.x<=prevX){
-			x = moveSpeed * Input.GetAxis ("Mouse X");
+		if (Input.mousePosition.x < 20){
+			x = -moveSpeed;
 
 		} 
 
 		//Идет проверка для правого края экрана	
-		else if(Input.mousePosition.x > Screen.width-20&&Input.mousePosition.x >= prevX){
-			x = moveSpeed * Input.GetAxis ("Mouse X");
+		else if(Input.mousePosition.x > Screen.width-20){
+			x = moveSpeed;
 
 		}
 		else {x=0;} ;
@@ -69,6 +75,29 @@ public class CameraMoveRTS : MonoBehaviour {
 
 
 
+
+		//Следим за героем
+			int DistanceAwayZ = 3;
+			int DistanceAwayX = 3; // Это расстояние по высоте. Отрицательное, потому что потом я вычитаю
+			
+
+
+		if (Input.GetKeyDown (KeyCode.Space)) LockCamera = true;
+		if (Input.GetKeyUp (KeyCode.Space)) LockCamera = false;
+		if (LockCamera)
+		{
+			/// Ищем клон префаба
+			GameObject player = GameObject.Find ("Player(Clone)");
+			if (player) 
+			{
+				/// Берем координаты из префаба игрока
+				Vector3 PlayerPOS = player.transform.position;
+
+								
+				/// Обновляем положение камеры
+				transform.position = new Vector3 (PlayerPOS.x - DistanceAwayX, transform.position.y, PlayerPOS.z - DistanceAwayZ);	
+			}
+		}
 
 	}
 	

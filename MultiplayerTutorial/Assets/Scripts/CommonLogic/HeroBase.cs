@@ -139,7 +139,7 @@ public class Hero : MonoBehaviour {
 			syncPosition = rigidbody.position;
 			stream.Serialize(ref syncPosition);
 			
-			syncPosition = rigidbody.velocity;
+			syncVelocity = rigidbody.velocity;
 			stream.Serialize(ref syncVelocity);
 		}
 		else
