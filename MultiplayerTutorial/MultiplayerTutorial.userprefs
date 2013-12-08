@@ -1,12 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CommonLogic\HeroBase.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\MiniMOBA\Assets\Scripts\GameManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\NetworkManager.cs" Line="37" Column="40" />
-      <File FileName="Assets\Scripts\Player.cs" Line="113" Column="1" />
-      <File FileName="Assets\Scripts\CommonLogic\HeroBase.cs" Line="26" Column="6" />
-      <File FileName="Assets\CameraMove\CameraMoveRTS.cs" Line="49" Column="31" />
-      <File FileName="Assets\CameraBehaviour.cs" Line="1" Column="1" />
+      <File FileName="..\..\MiniMOBA\Assets\Scripts\GUIControl.cs" Line="1" Column="1" />
+      <File FileName="..\..\MiniMOBA\Assets\Scripts\Character.cs" Line="149" Column="3" />
+      <File FileName="..\..\MiniMOBA\Assets\Scripts\EnemyDetector.cs" Line="1" Column="1" />
+      <File FileName="..\..\MiniMOBA\Assets\Scripts\GameManager.cs" Line="88" Column="15" />
+      <File FileName="..\..\MiniMOBA\Assets\Scripts\Hero.cs" Line="61" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
