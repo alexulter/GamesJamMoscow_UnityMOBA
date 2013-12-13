@@ -2,15 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Hero : MonoBehaviour {
+public class HeroBase : MonoBehaviour {
 
 	public double MaxHealthPoints{get;set;}
-	public double HealthPoints{get;set;}
+	public double HealthPoints = 100f;//{get;set;}
 	public double HealthRegen{get;set;}
 	public double MaxManaPoints{get;set;}
 	public double ManaPoints{get;set;}
 	public double ManaRegen{get;set;}
-	public double Velocity{ get; set; }
+	public double MoveSpeed = 10f;//{ get; set; }
 	public double AttackPower{get;set;}
 	public double MagicPower{get;set;}
 	public double HitTime{get;set;}
@@ -68,9 +68,9 @@ public class Hero : MonoBehaviour {
 					HeroEffects.Remove(currentEffect);
 				}
 				break;
-			case (int)Stats.Velocity:
+			case (int)Stats.MoveSpeed:
 				if (Time.time < currentEffect.Beginning+currentEffect.Durability){
-					Velocity+= currentEffect.Doing;
+					MoveSpeed+= currentEffect.Doing;
 				}else{
 					HeroEffects.Remove(currentEffect);
 				}
@@ -121,47 +121,47 @@ public class Hero : MonoBehaviour {
 		}
 	}
 	
-	public float speed = 10f;
-	
-	private float lastSynchronizationTime = 0f;
-	private float syncDelay = 0f;
-	private float syncTime = 0f;
-	private Vector3 syncStartPosition = Vector3.zero;
-	private Vector3 syncEndPosition = Vector3.zero;
-	
-
-	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
-	{
-		Vector3 syncPosition = Vector3.zero;
-		Vector3 syncVelocity = Vector3.zero;
-		if (stream.isWriting)
-		{
-			syncPosition = rigidbody.position;
-			stream.Serialize(ref syncPosition);
-			
-			syncVelocity = rigidbody.velocity;
-			stream.Serialize(ref syncVelocity);
-		}
-		else
-		{
-			stream.Serialize(ref syncPosition);
-			stream.Serialize(ref syncVelocity);
-			
-			syncTime = 0f;
-			syncDelay = Time.time - lastSynchronizationTime;
-			lastSynchronizationTime = Time.time;
-			
-			syncEndPosition = syncPosition + syncVelocity * syncDelay;
-			syncStartPosition = rigidbody.position;
-		}
-	}
-
-	private void SyncedMovement()
-	{
-		syncTime += Time.deltaTime;
-		
-		rigidbody.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime / syncDelay);
-	}
+//	public float speed = 10f;
+//	
+//	private float lastSynchronizationTime = 0f;
+//	private float syncDelay = 0f;
+//	private float syncTime = 0f;
+//	private Vector3 syncStartPosition = Vector3.zero;
+//	private Vector3 syncEndPosition = Vector3.zero;
+//	
+//
+//	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+//	{
+//		Vector3 syncPosition = Vector3.zero;
+//		Vector3 syncVelocity = Vector3.zero;
+//		if (stream.isWriting)
+//		{
+//			syncPosition = rigidbody.position;
+//			stream.Serialize(ref syncPosition);
+//			
+//			syncVelocity = rigidbody.velocity;
+//			stream.Serialize(ref syncVelocity);
+//		}
+//		else
+//		{
+//			stream.Serialize(ref syncPosition);
+//			stream.Serialize(ref syncVelocity);
+//			
+//			syncTime = 0f;
+//			syncDelay = Time.time - lastSynchronizationTime;
+//			lastSynchronizationTime = Time.time;
+//			
+//			syncEndPosition = syncPosition + syncVelocity * syncDelay;
+//			syncStartPosition = rigidbody.position;
+//		}
+//	}
+//
+//	private void SyncedMovement()
+//	{
+//		syncTime += Time.deltaTime;
+//		
+//		rigidbody.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime / syncDelay);
+//	}
 	
 	// Use this for initialization
 	void Start () {
@@ -188,7 +188,7 @@ public enum Stats{
 	MaxManaPoints,
 	ManaPoints,
 	ManaRegen,
-	Velocity,
+	MoveSpeed,
 	AttackPower,
 	MagicPower,
 	HitTime,
